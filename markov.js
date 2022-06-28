@@ -57,11 +57,31 @@ class MarkovMachine {
   getText() {
     // TODO: implement this!
 
+    let starterWord = this.words[0];
+    let currWord = starterWord;
+    let ans = [starterWord];
+
+    let randomWord = "";
+
+    while (randomWord !== null) {
+
+      let chain = this.chains.get(currWord);
+      let randomIdx = Math.floor(Math.random() * chain.length);
+
+      randomWord = chain[randomIdx];
+
+      if (randomWord === null) {
+        return ans.join(' ');
+      } else {
+        ans.push(randomWord);
+        currWord = randomWord;
+      }
+
+    }
+
     // - start at the first word in the input text
     // - find a random word from the following-words of that
     // - repeat until reaching the terminal null
   }
 }
 
-
-const catInHatMachine = new MarkovMachine("The cat in the hat.");
